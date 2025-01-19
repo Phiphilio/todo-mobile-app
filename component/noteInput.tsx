@@ -1,24 +1,36 @@
-import { Image, StyleSheet, TextInput, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  TextInput,
+  Text,
+  View,
+  Pressable,
+} from "react-native";
 
 type props = {
   text: string;
-  changementText: (s: string) => void;
+  changedText: (s: string) => void;
+  textSubmit: () => void;
 };
 
-export function NoteInput({ text, changementText }: props) {
-  // console.log(text);
+export function NoteInput({ text, changedText, textSubmit }: props) {
   return (
     <View style={styles.Input}>
       <TextInput
         style={styles.TextSection}
-        onChangeText={changementText}
+        onChangeText={changedText}
         value={text}
         placeholder="Que noter ?"
       />
-      <Image
-        source={require("@/assets/images/teddybear.png")}
-        style={styles.icone}
-      />
+      <Pressable
+        onPress={textSubmit}
+        android_ripple={{ color: "#A2005D", foreground: true, radius: 1 }}
+      >
+        <Image
+          source={require("@/assets/images/teddybear.png")}
+          style={styles.icone}
+        />
+      </Pressable>
     </View>
   );
 }
