@@ -1,10 +1,18 @@
 import { NoteInput } from "@/component/noteInput";
-import { useAsyncStore } from "@/hooks/useAsyncStore";
+import { TaskView } from "@/component/taskView";
+import { useGetItem } from "@/hooks/useGetItem";
+import { useSetItem } from "@/hooks/useSetItem";
 import { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
+type taskObject = {
+  title: string;
+  done: boolean;
+};
+
 export default function Index() {
-  const [task, setTask] = useState<object[]>([]);
+  const [task, setTask] = useState<taskObject[]>([]);
+  const [stockedTask, setStockedTask] = useState<taskObject[]>([]);
   const [text, onChangeText] = useState("");
 
   /**
@@ -41,8 +49,20 @@ export default function Index() {
    * Il s'execute lorsque la valeur qu'il prend en deuxième paramètre subit une modification
    */
   useEffect(() => {
-    useAsyncStore({ key: "todos", value: task });
+    // au démarrge de l'application, useState<taskObject[]>([]) initialise task avec un tableau vide ce qui fait que useEffect se lance
+    if (task.length > 0) {
+      useSetItem({ key: "todos", value: task });
+    }
   }, [task]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await useGetItem({ key: "todos" }); // Attente de la promesse
+      console.log("dans la mémoire il y a :", data); // Affiche la donnée une fois récupérer
+      setStockedTask(data);
+    };
+    fetchData(); // Appel de la fonction asynchrone
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,6 +72,9 @@ export default function Index() {
           changedText={onChangeText}
           textSubmit={taskAdd}
         />
+      </View>
+      <View style={styles.taskContainer}>
+        <TaskView title={stockedTask[0]?.title} done={stockedTask[0]?.done} />
       </View>
     </SafeAreaView>
   );
@@ -67,6 +90,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 100,
+  },
+
+  taskContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    //backgroundColor: "yellow",
   },
 });
 
