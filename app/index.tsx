@@ -4,7 +4,7 @@ import { useGetItem } from "@/hooks/useGetItem";
 import { useSetItem } from "@/hooks/useSetItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 type taskObject = {
   id: number;
@@ -81,7 +81,14 @@ export default function Index() {
         />
       </View>
       <View style={styles.taskContainer}>
-        <TaskView title={stockedTask[0]?.title} done={stockedTask[0]?.done} />
+        <Text style={styles.text}> à faire </Text>
+        <FlatList
+          data={stockedTask}
+          renderItem={({ item }) => (
+            <TaskView title={item.title} done={item.done} />
+          )}
+          contentContainerStyle={{ gap: 15 }}
+        />
       </View>
     </SafeAreaView>
   );
@@ -90,9 +97,10 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#212121",
   },
   header: {
-    backgroundColor: "#A2005D",
+    backgroundColor: "#D81B60",
     //flex: 1 / 7,
     justifyContent: "center",
     alignItems: "center",
@@ -103,7 +111,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    //backgroundColor: "yellow",
+    marginTop: 30,
+    gap: 30,
+    //backgroundColor: "#212121",
+  },
+  text: {
+    fontSize: 30,
+    fontStyle: "italic",
+    borderBottomWidth: 2,
+    borderBottomColor: "#FFFFFF",
+    color: "#FFFFFF",
   },
 });
 
