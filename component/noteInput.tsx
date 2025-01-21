@@ -21,6 +21,7 @@ export function NoteInput({ text, changedText, textSubmit }: props) {
         onChangeText={changedText}
         value={text}
         placeholder="Que noter ?"
+        placeholderTextColor="#FFFFFF"
       />
       <Pressable
         onPress={textSubmit}
@@ -29,6 +30,7 @@ export function NoteInput({ text, changedText, textSubmit }: props) {
         <Image
           source={require("@/assets/images/teddybear.png")}
           style={styles.icone}
+          tintColor="#FFFFFF"
         />
       </Pressable>
     </View>
@@ -37,7 +39,7 @@ export function NoteInput({ text, changedText, textSubmit }: props) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor: "white",
+    backgroundColor: "#212121",
     //flex: 1 / 4,
     borderRadius: 20,
     width: 300,
@@ -46,13 +48,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,
+    // borderColor: "#FFFFFF",
   },
   TextSection: {
     //flex: 1,
     height: 42,
     width: 200,
     fontSize: 15,
-    color: "black",
+    color: "#FFFFFF",
     //backgroundColor: "yellow",
   },
   icone: {
