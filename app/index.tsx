@@ -69,7 +69,7 @@ export default function Index() {
       setStockedTask(data);
     };
     fetchData(); // Appel de la fonction asynchrone
-  }, []);
+  }, [task]);
 
   return (
     <SafeAreaView style={styles.container}>
