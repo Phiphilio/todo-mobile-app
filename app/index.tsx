@@ -2,10 +2,12 @@ import { NoteInput } from "@/component/noteInput";
 import { TaskView } from "@/component/taskView";
 import { useGetItem } from "@/hooks/useGetItem";
 import { useSetItem } from "@/hooks/useSetItem";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 type taskObject = {
+  id: number;
   title: string;
   done: boolean;
 };
@@ -24,15 +26,19 @@ export default function Index() {
    */
   //console.log("ce que contient task avant modification :", task);
 
+  // création d'un id basé sur la date :
+  const generateId = Date.now();
+
   const taskAdd = () => {
-    const notedTask = {
+    const notedTask: taskObject = {
+      id: generateId,
       title: text,
       done: false,
     };
-    setTask([...task, notedTask]); // gâce à l'opératuer de décomposition "...", j'ajoute le tableau task, puis j'ajoute l'objet notedTask et le tout forme un nouveau tableau
+    setTask([...stockedTask, notedTask]); // gâce à l'opératuer de décomposition "...", j'ajoute le tableau task, puis j'ajoute l'objet notedTask et le tout forme un nouveau tableau
 
     /**
-     * je n'aurais pas pu utiliser array.push() pour ajouter notedTask pour 2 raisons :
+     * je n'aurais pas pu utiliser array.push() pour ajouter notedTask pour 2 raisons:
      * 1) react ne permet pas de modifier directement la valeur d'une variable d'état autrement qu'avec la fonction qui y est associé (ici setTask)
      * 2) j'ai setTask s'attend à prendre un tableau contenant des objets en paramètre, malheureusement, la methode push() renvoie un nombre qui correspond
      * à la nouvelle longueur du tableau en plus d'y ajouter un élément.
@@ -58,6 +64,7 @@ export default function Index() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await useGetItem({ key: "todos" }); // Attente de la promesse
+      /**Si je ne mets pas await devant la fonction useGetItem je recevrais uniquement la promesse et pas le résultat */
       console.log("dans la mémoire il y a :", data); // Affiche la donnée une fois récupérer
       setStockedTask(data);
     };
