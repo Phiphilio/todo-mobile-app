@@ -1,50 +1,91 @@
-# Welcome to your Expo app 👋
+- **Projet :** App TODO simple.
+- **Notions principales :**
+  - Gestion de l’état local avec `useState` et `useReducer`.
+  - Typage des états, des props et des fonctions avec TypeScript.
+  - Création de composants réutilisables (boutons, cartes de tâches).
+- **Incorporation :**
+  - Réutilise les notions de composants et de props.
+  - Applique les conventions TypeScript déjà vues.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+### **1. Prérequis**
 
-## Get started
+Avant de commencer, assure-toi d’avoir une bonne compréhension des bases suivantes :
 
-1. Install dependencies
+1. **React Native :**
+   - Création de composants (fonctionnels).
+   - Compréhension de `props` et `state`.
+   - Gestion d’événements (`onPress`, `onChangeText`, etc.).
+2. **TypeScript :**
+   - Typage de variables, objets, et fonctions.
+   - Interfaces et types (`type` vs `interface`).
+   - Utilisation de `React.FC` ou des fonctions fléchées avec TypeScript pour typer les composants.
+3. **React Hooks :**
+   - Utilisation de `useState` pour gérer l’état local.
+   - Compréhension de `useReducer` comme alternative à `useState` pour des états plus complexes.
 
-   ```bash
-   npm install
-   ```
+### **2. Notions principales à creuser**
 
-2. Start the app
+Voici les notions spécifiques sur lesquelles te concentrer pour ce projet :
 
-   ```bash
-    npx expo start
-   ```
+### **a. Gestion de l’état local**
 
-In the output, you'll find options to open the app in a
+- **Avec `useState`:**
+  - Gérer des états simples (par exemple : une liste de tâches).
+  -
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+**Avec `useReducer`:**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Gérer des états plus complexes ou qui nécessitent plusieurs actions (exemple : ajouter, supprimer, marquer comme fait).
 
-## Get a fresh project
+### **b. Typage des états, des props, et des fonctions**
 
-When you're ready, run:
+**Typage des états avec `useState` et `useReducer`:**
 
-```bash
-npm run reset-project
-```
+Typage des props des composants
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Typage des fonctions
 
-## Learn more
+Création de composants réutilisables
 
-To learn more about developing your project with Expo, look at the following resources:
+### **3. Étapes pour le projet**
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. **Structure initiale :**
+   - Crée une application avec une structure simple.
+   - Prépare un composant parent (par exemple : `App.tsx`) pour contenir les fonctionnalités principales.
+2. **Ajout des tâches :**
+   - Mets en place un champ texte pour entrer une nouvelle tâche.
+   - Ajoute une fonction qui met à jour la liste des tâches via `useState` ou `useReducer`.
+3. **Liste des tâches :**
+   - Affiche les tâches dans un composant `FlatList`.
+   - Passe les données de chaque tâche à un composant enfant `TaskItem`.
+4. **Marquer comme fait et supprimer une tâche :**
+   - Implémente la logique pour marquer une tâche comme complétée.
+   - Ajoute une fonctionnalité pour supprimer une tâche.
+5. **UI basique :**
+   - Stylise les composants pour les rendre clairs et fonctionnels.
+   - Ajoute des états visuels (par exemple, change la couleur d’une tâche lorsqu’elle est complétée).
+6. **Tests :**
+   - Vérifie que l’ajout, la suppression, et le marquage comme fait fonctionnent correctement.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+### **4. Bonus**
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Si tu termines rapidement le projet, ajoute ces fonctionnalités :
+
+- **Filtrage des tâches :**
+  - Ajoute des boutons pour filtrer les tâches (toutes, complétées, non complétées).
+- **Animations :**
+  - Ajoute une animation subtile lors de l’ajout ou de la suppression de tâches avec **React Native Reanimated**.
+
+---
+
+### **5. Résultat attendu**
+
+Une application TODO simple avec les fonctionnalités suivantes :
+
+1. Ajouter des tâches.
+2. Afficher une liste de tâches.
+3. Marquer une tâche comme complétée.
+4. Supprimer une tâche.
+5. Une interface claire et intuitive, avec une bonne gestion de l’état et des types.
